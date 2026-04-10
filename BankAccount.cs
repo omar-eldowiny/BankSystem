@@ -1,55 +1,63 @@
-﻿namespace BankSystem
+﻿using System;
+
+namespace BankSystem
 {
     public class BankAccount
     {
-        //fields 
-        private decimal balance; 
-        //properties
-        public decimal Balance 
+        // Private Fields 
+        private decimal _balance;
+
+        // Properties
+        public decimal Balance
         {
-            get { return balance; }
-            protected set 
+            get { return _balance; }
+            protected set
             {
                 if (value < 0)
-                    Console.WriteLine("Balance can not be less than zero");
+                    Console.WriteLine("Error: Balance cannot be less than zero.");
                 else
-                    balance = value; 
-            } 
+                    _balance = value;
+            }
         }
-        protected string AccountNumber { get; private set; }
-        
-        //constuctor 
-        public BankAccount(string accountNumber , decimal optionalBalance = 0 )
+
+        public string AccountNumber { get; private set; }
+
+        // Constructor
+        public BankAccount(string accountNumber, decimal initialBalance = 0)
         {
             AccountNumber = accountNumber;
-            balance = optionalBalance; 
+            Balance = initialBalance; // Using Property for validation
         }
-        //methods 
-        public virtual void deposite(decimal amount)
+
+        // Methods
+        public virtual void Deposit(decimal amount)
         {
             if (amount > 0)
             {
-                balance += amount;
-                Console.WriteLine("The Deposite Done Sussfully !");
-                return;
+                Balance += amount;
+                Console.WriteLine($"Successfully deposited {amount:C}. New Balance: {Balance:C}");
             }
-            else
-                Console.WriteLine("Please Enter a Valid Amont !"); 
-        }
-        public virtual void withDraw(decimal amount)
-        {
-            if (amount <= 0)
-                Console.WriteLine("Please Enter A Valid Amount");
-            else if (amount > balance)
-                Console.WriteLine("There is NOT Enough Balance !");
             else
             {
-                balance -= amount;
-                Console.WriteLine("The Transaction Done Sucssefully !");
+                Console.WriteLine("Error: Please enter a valid deposit amount!");
             }
-
         }
-             
 
+        public virtual void Withdraw(decimal amount)
+        {
+            if (amount <= 0)
+            {
+                Console.WriteLine("Error: Please enter a valid withdrawal amount.");
+            }
+            else if (amount > Balance)
+            {
+                Console.WriteLine("Error: Insufficient balance!");
+            }
+            else
+            {
+                Balance -= amount;
+                Console.WriteLine($"Successfully withdrew {amount:C}. Remaining Balance: {Balance:C}");
+            }
+        }
     }
 }
