@@ -3,12 +3,12 @@
 
 A console application built with **C#** to practically demonstrate the core pillars of Object-Oriented Programming (OOP). 
 
-## 🎯 Project Overview
+##  Project Overview
 This repository contains two mini-projects designed to apply OOP concepts in real-world scenarios:
 1. **Bank Account System:** Simulates different types of bank accounts (Standard, Savings, Checking) with specific deposit, withdrawal, and interest logic.
 2. **Employee Management System:** Manages different employee roles (Manager, Developer, Tester) with custom salary calculations and information display.
 
-## 🛠️ Key OOP Concepts Applied
+##  Key OOP Concepts Applied
 
 * **Encapsulation:** * Secured sensitive data (e.g., `_balance`, `salary`) using `private` fields.
     * Implemented validation rules inside `public` properties (e.g., preventing negative interest rates or invalid experience years).
