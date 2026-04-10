@@ -1,31 +1,42 @@
-﻿namespace BankSystem
+﻿using System;
+
+namespace BankSystem
 {
     public class SavingsAccount : BankAccount
     {
-        //fields 
-        private decimal interestRate; 
-        //properties 
-        public decimal InterestRate 
+        // Fields
+        private decimal _interestRate;
+
+        // Properties
+        public decimal InterestRate
         {
-            get { return interestRate; }
+            get { return _interestRate; }
             set
             {
-                if(value < 0)
-                    Console.WriteLine("the interest can NOT be less than zero ! ");
-                else if (value > 1)
-                    Console.WriteLine("the interest can NOT be more than 100% !");
+                if (value < 0 || value > 1)
+                    Console.WriteLine("Error: Interest rate must be between 0 and 1 (e.g., 0.05 for 5%).");
                 else
-                {
-                    interestRate = value;
-                    Console.WriteLine("your interest has been signed sucssfully !");
-                }
+                    _interestRate = value;
             }
         }
-        //constructor 
-        public SavingsAccount(string accountNumber, decimal initialBalance, decimal interestRate) : base(accountNumber, initialBalance)
+
+        // Constructor
+        public SavingsAccount(string accountNumber, decimal initialBalance, decimal interestRate) 
+            : base(accountNumber, initialBalance)
         {
-          
-            this.interestRate = interestRate;
+            InterestRate = interestRate; // Using Property
+        }
+
+        // Methods
+        public void AddInterest()
+        {
+            // Calculate the interest amount
+            decimal interestAmount = Balance * InterestRate;
+            
+            Console.WriteLine($"Adding {InterestRate * 100}% interest...");
+            
+            // Add it to the balance using the base class Deposit method
+            Deposit(interestAmount);
         }
     }
 }
