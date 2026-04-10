@@ -1,30 +1,38 @@
-﻿namespace BankSystem
+﻿using System;
+
+namespace BankSystem
 {
-    public class CheckingAccount: BankAccount 
+    public class CheckingAccount : BankAccount
     {
-        //fields 
-        private decimal withDrawFee; 
-        //properties 
-        public decimal WithDrawFee
+        // Fields
+        private decimal _withdrawFee;
+
+        // Properties
+        public decimal WithdrawFee
         {
-            get { return withDrawFee; }
+            get { return _withdrawFee; }
             set
             {
                 if (value < 0)
-                    Console.WriteLine("fee can NOT be less than zero");
+                    Console.WriteLine("Error: Fee cannot be less than zero.");
                 else
-                    withDrawFee = value; 
+                    _withdrawFee = value;
             }
         }
-        //constructor 
-        public CheckingAccount(string accountNumber , decimal initialBalance ,decimal withDrawFee) :base(accountNumber , initialBalance)
+
+        // Constructor
+        public CheckingAccount(string accountNumber, decimal initialBalance, decimal withdrawFee) 
+            : base(accountNumber, initialBalance)
         {
-           WithDrawFee = withDrawFee;
+            WithdrawFee = withdrawFee; // Using Property
         }
-        //methods 
-        public override void withDraw(decimal amount)
+
+        // Methods
+        public override void Withdraw(decimal amount)
         {
-            base.withDraw(amount + withDrawFee);
+            Console.WriteLine($"Attempting to withdraw {amount:C} with a fee of {WithdrawFee:C}...");
+            // Pass the total amount (requested + fee) to the base class
+            base.Withdraw(amount + WithdrawFee);
         }
     }
 }
